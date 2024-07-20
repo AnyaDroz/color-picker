@@ -1,21 +1,32 @@
-# Getting Started with Create React App
+# Color Picker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-## Available Scripts
+Clone the repo
 
-In the project directory, you can run:
+```bash
+git clone https://github.com/AnyaDroz/color-picker.git
+```
 
-### `npm start`
+Navigate to the project directory
 
-Runs the app in the development mode.\
+```bash
+cd color-picker
+```
+
+Install the dependencies
+
+```bash
+npm i
+```
+
+Start the application
+
+```bash
+npm start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
