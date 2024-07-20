@@ -200,43 +200,6 @@ const ColorPicker = () => {
         return false;
     };
 
-    const isPointInTriangle = (x: number, y: number) => {
-        const canvas = colorPickerRef.current;
-        if (canvas) {
-            const radius = canvas.width / 2;
-            const innerRadius = radius - doughnutThickness / 2;
-            const angle = handlePositionToAngle(handlePosition, radius) + rotationAngle;
-            const p0 = {
-                x: radius + innerRadius * Math.cos(angle),
-                y: radius + innerRadius * Math.sin(angle),
-            };
-            const p1 = {
-                x: radius + innerRadius * Math.cos(angle + (2 * Math.PI) / 3),
-                y: radius + innerRadius * Math.sin(angle + (2 * Math.PI) / 3),
-            };
-            const p2 = {
-                x: radius + innerRadius * Math.cos(angle - (2 * Math.PI) / 3),
-                y: radius + innerRadius * Math.sin(angle - (2 * Math.PI) / 3),
-            };
-
-            const area =
-                0.5 *
-                (-p1.y * p2.x +
-                    p0.y * (-p1.x + p2.x) +
-                    p0.x * (p1.y - p2.y) +
-                    p1.x * p2.y);
-            const s =
-                (1 / (2 * area)) *
-                (p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * x + (p0.x - p2.x) * y);
-            const t =
-                (1 / (2 * area)) *
-                (p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * x + (p1.x - p0.x) * y);
-
-            return s >= 0 && t >= 0 && 1 - s - t >= 0;
-        }
-        return false;
-    };
-
     const handleMouseDown = (
         e: React.MouseEvent<HTMLCanvasElement, MouseEvent>,
     ) => {
@@ -286,7 +249,7 @@ const ColorPicker = () => {
             } else if (isDraggingTriangle) {
                 const x = e.clientX - canvas.getBoundingClientRect().left;
                 const y = e.clientY - canvas.getBoundingClientRect().top;
-                if (isPointInTriangle(x, y)) {
+                if (isInsideTriangle(x, y)) {
                     setTriangleHandlePosition({ x, y });
                     const ctx = canvas.getContext("2d");
                     if (ctx) {
